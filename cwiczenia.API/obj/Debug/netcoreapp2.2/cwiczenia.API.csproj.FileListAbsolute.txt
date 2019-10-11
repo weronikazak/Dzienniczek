@@ -1,0 +1,14 @@
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\bin\Debug\netcoreapp2.2\cwiczenia.API.deps.json
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\bin\Debug\netcoreapp2.2\cwiczenia.API.runtimeconfig.json
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\bin\Debug\netcoreapp2.2\cwiczenia.API.runtimeconfig.dev.json
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\bin\Debug\netcoreapp2.2\cwiczenia.API.dll
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\bin\Debug\netcoreapp2.2\cwiczenia.API.pdb
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\obj\Debug\netcoreapp2.2\cwiczenia.API.csprojAssemblyReference.cache
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\obj\Debug\netcoreapp2.2\cwiczenia.API.csproj.CoreCompileInputs.cache
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\obj\Debug\netcoreapp2.2\cwiczenia.API.RazorAssemblyInfo.cache
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\obj\Debug\netcoreapp2.2\cwiczenia.API.RazorAssemblyInfo.cs
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\obj\Debug\netcoreapp2.2\cwiczenia.API.AssemblyInfoInputs.cache
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\obj\Debug\netcoreapp2.2\cwiczenia.API.AssemblyInfo.cs
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\obj\Debug\netcoreapp2.2\cwiczenia.API.RazorTargetAssemblyInfo.cache
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\obj\Debug\netcoreapp2.2\cwiczenia.API.dll
+C:\Users\Weronika\Documents\EF_Cwiczenia\cwiczenia.API\obj\Debug\netcoreapp2.2\cwiczenia.API.pdb
