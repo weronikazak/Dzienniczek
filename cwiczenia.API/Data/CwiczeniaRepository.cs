@@ -1,43 +1,81 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using cwiczenia.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace cwiczenia.API.Data
 {
     public class CwiczeniaRepository : ICwiczeniaRepository
     {
+        private DataContext _context;
+
+        public CwiczeniaRepository(DataContext context)
+        {
+            _context = context;
+        }
         public void Add<T>(T entity) where T : class
         {
-            throw new System.NotImplementedException();
+            _context.Add(entity);
         }
 
         public void Delete<T>(T entity) where T : class
         {
-            throw new System.NotImplementedException();
+            _context.Remove(entity);
         }
 
-        public Task<Grade> GetGrades()
+        public async Task<Class> GetClass(int id)
         {
-            throw new System.NotImplementedException();
+            var clas = await _context.Classes.FirstOrDefaultAsync(c => c.Id == id);
+
+            return clas;
         }
 
-        public Task<Student> GetStudent(int id)
+        public async Task<IEnumerable<Class>> GetClasses()
         {
-            throw new System.NotImplementedException();
+            var classes = await _context.Classes.ToListAsync();
+
+            return classes;
         }
 
-        public Task<Student> GetStudents()
+        public async Task<IEnumerable<Grade>> GetGrades()
         {
-            throw new System.NotImplementedException();
+            var grades = await _context.Grades.ToListAsync();
+            return grades;
         }
 
-        public Task<bool> SaveAll()
+        public async Task<Student> GetStudent(int id)
         {
-            throw new System.NotImplementedException();
+            var student = await _context.Students.FirstOrDefaultAsync(s => s.Id == id);
+
+            return student;
         }
 
-        public Task<Student> UpdateStudent(int id)
+        public async Task<IEnumerable<Student>> GetStudents()
         {
-            throw new System.NotImplementedException();
+            var students = await _context.Students.ToListAsync();
+
+            return students;
         }
+
+        public async Task<Teacher> GetTeacher(int id)
+        {
+           var teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.Id == id);
+
+           return teacher;
+        }
+
+        public async Task<IEnumerable<Teacher>> GetTeachers()
+        {
+            var teachers = await _context.Teachers.ToListAsync();
+
+            return teachers;
+        }
+
+        public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+
     }
 }
