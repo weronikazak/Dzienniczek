@@ -7,7 +7,7 @@ namespace cwiczenia.API.Data
 {
     public class CwiczeniaRepository : ICwiczeniaRepository
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
         public CwiczeniaRepository(DataContext context)
         {

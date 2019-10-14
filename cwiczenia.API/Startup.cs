@@ -42,6 +42,7 @@ namespace cwiczenia.API
                 app.UseHsts();
             }
 
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             //app.UseHttpsRedirection();
             app.UseMvc();
         }
