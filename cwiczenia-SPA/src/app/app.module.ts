@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DesktopComponent } from './home/desktop/desktop.component';
 import { StudentService } from './services/student.service';
 import { AlertifyService } from './services/alertify.service';
+import { ListFilterPipe } from './pipes/list-filter.pipe';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AlertifyService } from './services/alertify.service';
       HomeComponent,
       NavbarComponent,
       StudentAddComponent,
-      DesktopComponent
+      DesktopComponent,
+      ListFilterPipe
    ],
    imports: [
       BrowserModule,
@@ -39,9 +41,9 @@ import { AlertifyService } from './services/alertify.service';
       HttpClientModule
    ],
    providers: [
-      DecimalPipe,
       StudentService,
-      AlertifyService
+      AlertifyService,
+      ListFilterPipe
    ],
    bootstrap: [
       AppComponent

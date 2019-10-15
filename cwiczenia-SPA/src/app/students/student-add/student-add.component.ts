@@ -34,7 +34,6 @@ export class StudentAddComponent implements OnInit {
 
   onSubmit() {
     if (this.addStudentForm.valid) {
-
       this.newStudent = Object.assign({}, this.addStudentForm.value);
       this.studentService.addStudent(this.newStudent).subscribe(() => {
         this.alertify.success('Dodano ucznia');

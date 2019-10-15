@@ -1,9 +1,10 @@
-import { Component, OnInit, PipeTransform } from '@angular/core';
+import { Component, OnInit, PipeTransform, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
 import { Student } from 'src/app/models/student';
 import { StudentService } from 'src/app/services/student.service';
+import { ListFilterPipe } from 'src/app/pipes/list-filter.pipe';
 
 @Component({
   selector: 'app-student-list',
@@ -13,29 +14,18 @@ import { StudentService } from 'src/app/services/student.service';
 
 
 export class StudentListComponent implements OnInit {
-
   students: Student[];
-
-  filter = new FormControl('');
+  @Input() searchModel: Student;
 
   ngOnInit() {
     this.loadStudents();
   }
 
-  constructor(pipe: DecimalPipe, private studentService: StudentService) { }
+  constructor(private studentService: StudentService, public listFilter: ListFilterPipe) { }
 
   loadStudents() {
     this.studentService.getStudents().subscribe((students: Student[]) => {
       this.students = students;
-    });
-  }
-
-  search(text: string, pipe: PipeTransform): Student[] {
-    return this.students.filter(studednt => {
-      const term = text.toLowerCase();
-      return studednt.name.toLowerCase().includes(term)
-          || pipe.transform(studednt.name).includes(term)
-          || pipe.transform(studednt.surname).includes(term);
     });
   }
 }

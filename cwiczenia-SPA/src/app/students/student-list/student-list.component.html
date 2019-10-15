@@ -1,13 +1,17 @@
 <div class="container">
   <p>You can do filter table data, in this case with observables and our <code>NgbHighlight</code> component used in Typeahead</p>
 
-  <form>
-    <div class="form-group form-inline">
-        Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
-    <button class="btn btn-lg btn-primary" [routerLink]="['/uczen/dodaj']" routerLinkActive="router-link-active" > DODAJ UCZNIA</button>
 
+    <div class="form-group form-inline">
+        Szukaj ucznia:
+        <div class="">
+          <input class="form-control ml-2" type="text" [(ngModel)]="searchModel"/>
+          <button class="btn btn-lg btn-primary" [routerLink]="['/uczen/dodaj']" routerLinkActive="router-link-active" > DODAJ UCZNIA</button>
+      
+        </div>
+        
     </div>
-  </form>
+
 
   <table class="table table-striped">
     <thead>
@@ -22,16 +26,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let student of students">
+    <tr *ngFor="let student of students | listFilter: searchModel">
       <th scope="row">{{ student.id }}</th>
       <td>
         <img [src]="student.photo">
       </td>
-      <td><ngb-highlight [result]="student.name" [term]="filter.value"></ngb-highlight></td>
-      <td><ngb-highlight [result]="student.surname" [term]="filter.value"></ngb-highlight></td>
-      <td><ngb-highlight [result]="student.dateOfBirth" [term]="filter.value"></ngb-highlight></td>
-      <td><ngb-highlight [result]="student.height" [term]="filter.value"></ngb-highlight></td>
-      <td><ngb-highlight [result]="student.weight" [term]="filter.value"></ngb-highlight></td>
+      <td><ngb-highlight [result]="student.name"></ngb-highlight></td>
+      <td><ngb-highlight [result]="student.surname"></ngb-highlight></td>
+      <td><ngb-highlight [result]="student.dateOfBirth | date"></ngb-highlight></td>
+      <td><ngb-highlight [result]="student.height | number"></ngb-highlight></td>
+      <td><ngb-highlight [result]="student.weight | number"></ngb-highlight></td>
     </tr>
     </tbody>
   </table>
