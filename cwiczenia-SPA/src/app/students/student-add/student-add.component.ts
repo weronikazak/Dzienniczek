@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { StudentService } from 'src/app/services/student.service';
 import { Student } from 'src/app/models/student';
-import { AlertifyService } from 'src/app/services/alertify.service';
 import { Router } from '@angular/router';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-student-add',
@@ -43,7 +43,7 @@ export class StudentAddComponent implements OnInit {
       }, () => {
         this.router.navigate(['/uczen']);
       });
-      // this.addStudentForm.reset();
+      this.addStudentForm.reset();
     }
   }
 }

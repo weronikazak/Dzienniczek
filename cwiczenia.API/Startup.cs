@@ -1,4 +1,5 @@
-﻿using cwiczenia.API.Data;
+﻿using AutoMapper;
+using cwiczenia.API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -20,12 +21,13 @@ namespace cwiczenia.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddAutoMapper();
             services.AddDbContext<DataContext>
                 (x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddScoped<ICwiczeniaRepository, CwiczeniaRepository>();
             services.AddCors();
+            //Mapper.Reset();
+            services.AddAutoMapper(typeof(Startup));
 
         }
 
