@@ -21,11 +21,11 @@ namespace cwiczenia.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ClassName");
+
                     b.Property<int>("TeacherId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Classes");
                 });
@@ -37,8 +37,6 @@ namespace cwiczenia.API.Migrations
 
                     b.Property<string>("GradeName");
 
-                    b.Property<string>("Section");
-
                     b.HasKey("Id");
 
                     b.ToTable("Grades");
@@ -49,9 +47,9 @@ namespace cwiczenia.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("DateOfBirth");
+                    b.Property<int>("ClassId");
 
-                    b.Property<int?>("GradeId");
+                    b.Property<DateTime?>("DateOfBirth");
 
                     b.Property<decimal>("Height");
 
@@ -65,7 +63,7 @@ namespace cwiczenia.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GradeId");
+                    b.HasIndex("ClassId");
 
                     b.ToTable("Students");
                 });
@@ -75,6 +73,8 @@ namespace cwiczenia.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("ClassId");
+
                     b.Property<string>("Name");
 
                     b.Property<byte[]>("Photo");
@@ -83,22 +83,26 @@ namespace cwiczenia.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Teachers");
-                });
+                    b.HasIndex("ClassId")
+                        .IsUnique();
 
-            modelBuilder.Entity("cwiczenia.API.Models.Class", b =>
-                {
-                    b.HasOne("cwiczenia.API.Models.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("cwiczenia.API.Models.Student", b =>
                 {
-                    b.HasOne("cwiczenia.API.Models.Grade")
+                    b.HasOne("cwiczenia.API.Models.Class", "Class")
                         .WithMany("Students")
-                        .HasForeignKey("GradeId");
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("cwiczenia.API.Models.Teacher", b =>
+                {
+                    b.HasOne("cwiczenia.API.Models.Class", "Class")
+                        .WithOne("Teacher")
+                        .HasForeignKey("cwiczenia.API.Models.Teacher", "ClassId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

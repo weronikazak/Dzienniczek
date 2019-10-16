@@ -18,6 +18,7 @@ import { DesktopComponent } from './home/desktop/desktop.component';
 import { StudentService } from './services/student.service';
 import { AlertifyService } from './services/alertify.service';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
+import { ClassListComponent } from './class/class-list/class-list.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ListFilterPipe } from './pipes/list-filter.pipe';
       NavbarComponent,
       StudentAddComponent,
       DesktopComponent,
-      ListFilterPipe
+      ListFilterPipe,
+      ClassListComponent
    ],
    imports: [
       BrowserModule,

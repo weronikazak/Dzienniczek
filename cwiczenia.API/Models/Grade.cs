@@ -6,7 +6,6 @@ namespace cwiczenia.API.Models
     {
         public int Id { get; set; }
         public string GradeName { get; set; }
-        public string Section { get; set; }
-        public ICollection<Student> Students { get; set; }
+        // public ICollection<SetGradeTo> SetGradeTo { get; set; }
     }
 }
