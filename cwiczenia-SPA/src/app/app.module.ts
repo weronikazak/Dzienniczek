@@ -19,6 +19,10 @@ import { StudentService } from './services/student.service';
 import { AlertifyService } from './services/alertify.service';
 import { ListFilterPipe } from './pipes/list-filter.pipe';
 import { ClassListComponent } from './class/class-list/class-list.component';
+import { ClassService } from './services/class.service';
+import { TeacherService } from './services/teacher.service';
+import { SubjectService } from './services/subject.service';
+import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
 
 
 @NgModule({
@@ -32,7 +36,8 @@ import { ClassListComponent } from './class/class-list/class-list.component';
       StudentAddComponent,
       DesktopComponent,
       ListFilterPipe,
-      ClassListComponent
+      ClassListComponent,
+      SubjectListComponent
    ],
    imports: [
       BrowserModule,
@@ -45,7 +50,10 @@ import { ClassListComponent } from './class/class-list/class-list.component';
    providers: [
       StudentService,
       AlertifyService,
-      ListFilterPipe
+      ListFilterPipe,
+      TeacherService,
+      ClassService,
+      SubjectService
    ],
    bootstrap: [
       AppComponent

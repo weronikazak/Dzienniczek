@@ -10,7 +10,7 @@ export const routes: Routes = [
   { path: 'uczen', component: StudentListComponent},
   { path: 'nauczyciel', component: TeacherListComponent},
   { path: 'klasa', component: ClassListComponent},
-  { path: 'oceny', component: StudentListComponent},
+  { path: 'przedmioty', component: HomeComponent},
   { path: 'uczen/dodaj', component: StudentAddComponent},
 ];
 

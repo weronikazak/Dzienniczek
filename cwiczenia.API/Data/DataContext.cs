@@ -9,29 +9,36 @@ namespace cwiczenia.API.Data
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Grade> Grades { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
+        //public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Class> Classes { get; set; }
-        // public DbSet<SetGradeTo> GradeSets { get; set; }
+        //public DbSet<Subjects> Subjects { get; set; }
+        public DbSet<Enrollments> Enrollments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Teacher>()
-                .HasOne(t => t.Class)
-                .WithOne(t => t.Teacher)
-                .HasForeignKey<Class>(t => t.TeacherId);
-
-            modelBuilder.Entity<Class>()
-                .HasOne(t => t.Teacher)
-                .WithOne(t => t.Class)
-                .HasForeignKey<Teacher>(t => t.ClassId);
-
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Class)
-                .WithMany(s => s.Students)
-                .HasForeignKey(c => c.ClassId);
-                 
-                    
+                .WithMany(c => c.Students)
+                .HasForeignKey(s => s.ClassId);
+
+            modelBuilder.Entity<Enrollments>()
+                .HasKey(bc => new { bc.GradeId, bc.StudentId, bc.SubjectId });
+
+            modelBuilder.Entity<Enrollments>()
+                .HasOne(s => s.Student)
+                .WithMany(s => s.Enrollments)
+                .HasForeignKey(s => s.StudentId);
+
+            modelBuilder.Entity<Enrollments>()
+                .HasOne(s => s.Subject)
+                .WithMany(s => s.Enrollments)
+                .HasForeignKey(s => s.SubjectId);  
+
+            modelBuilder.Entity<Enrollments>()
+                .HasOne(t => t.Grade)
+                .WithMany(u => u.Enrollments)
+                .HasForeignKey(i => i.GradeId);
         }
     }
 }

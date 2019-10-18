@@ -4,7 +4,7 @@ export interface Teacher {
     id: number;
     name: string;
     surname: string;
-    photo: number[];
+    photo: string;
     classId: number;
     class: Class;
 }

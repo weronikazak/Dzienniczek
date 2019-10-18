@@ -57,19 +57,31 @@ namespace cwiczenia.API.Data
             return students;
         }
 
-        public async Task<Teacher> GetTeacher(int id)
-        {
-           var teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.Id == id);
+        // public Task<Subjects> GetSubject(int id)
+        // {
+        //     throw new System.NotImplementedException();
+        // }
 
-           return teacher;
-        }
+        // public async Task<IEnumerable<Subjects>> GetSubjects()
+        // {
+        //     var subjects = await _context.Subjects.ToListAsync();
 
-        public async Task<IEnumerable<Teacher>> GetTeachers()
-        {
-            var teachers = await _context.Teachers.ToListAsync();
+        //     return subjects;
+        // }
 
-            return teachers;
-        }
+        // public async Task<Teacher> GetTeacher(int id)
+        // {
+        //    var teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.Id == id);
+
+        //    return teacher;
+        // }
+
+        // public async Task<IEnumerable<Teacher>> GetTeachers()
+        // {
+        //     var teachers = await _context.Teachers.ToListAsync();
+
+        //     return teachers;
+        // }
 
         public async Task<bool> SaveAll()
         {

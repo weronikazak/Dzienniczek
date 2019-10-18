@@ -10,12 +10,12 @@ namespace cwiczenia.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ClassController : ControllerBase
+    public class ClassesController : ControllerBase
     {
         private IMapper _mapper;
         private ICwiczeniaRepository _repo;
 
-        public ClassController(IMapper mapper, ICwiczeniaRepository repo)
+        public ClassesController(IMapper mapper, ICwiczeniaRepository repo)
         {
             _mapper = mapper;
             _repo = repo;

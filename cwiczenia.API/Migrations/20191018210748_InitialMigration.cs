@@ -14,7 +14,7 @@ namespace cwiczenia.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ClassName = table.Column<string>(nullable: true),
-                    TeacherId = table.Column<int>(nullable: false)
+                    Year = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,6 +35,19 @@ namespace cwiczenia.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Subjects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SubjectName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subjects", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
@@ -46,7 +59,7 @@ namespace cwiczenia.API.Migrations
                     Photo = table.Column<string>(nullable: true),
                     Height = table.Column<decimal>(nullable: false),
                     Weight = table.Column<float>(nullable: false),
-                    ClassId = table.Column<int>(nullable: false)
+                    ClassId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,45 +69,61 @@ namespace cwiczenia.API.Migrations
                         column: x => x.ClassId,
                         principalTable: "Classes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teachers",
+                name: "Enrollments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    Surname = table.Column<string>(nullable: true),
-                    Photo = table.Column<byte[]>(nullable: true),
-                    ClassId = table.Column<int>(nullable: false)
+                    StudentId = table.Column<int>(nullable: false),
+                    SubjectId = table.Column<int>(nullable: false),
+                    GradeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teachers", x => x.Id);
+                    table.PrimaryKey("PK_Enrollments", x => new { x.GradeId, x.StudentId, x.SubjectId });
                     table.ForeignKey(
-                        name: "FK_Teachers_Classes_ClassId",
-                        column: x => x.ClassId,
-                        principalTable: "Classes",
+                        name: "FK_Enrollments_Grades_GradeId",
+                        column: x => x.GradeId,
+                        principalTable: "Grades",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Enrollments_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Enrollments_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Enrollments_StudentId",
+                table: "Enrollments",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Enrollments_SubjectId",
+                table: "Enrollments",
+                column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Students_ClassId",
                 table: "Students",
                 column: "ClassId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Teachers_ClassId",
-                table: "Teachers",
-                column: "ClassId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Enrollments");
+
             migrationBuilder.DropTable(
                 name: "Grades");
 
@@ -102,7 +131,7 @@ namespace cwiczenia.API.Migrations
                 name: "Students");
 
             migrationBuilder.DropTable(
-                name: "Teachers");
+                name: "Subjects");
 
             migrationBuilder.DropTable(
                 name: "Classes");

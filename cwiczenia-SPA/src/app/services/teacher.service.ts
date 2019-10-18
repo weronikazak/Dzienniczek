@@ -13,19 +13,19 @@ export class TeacherService {
 constructor(private http: HttpClient) { }
 
   getTeacher(id: number): Observable<Teacher> {
-    return this.http.get<Teacher>(this.apiUrl + 'teacher/' + id);
+    return this.http.get<Teacher>(this.apiUrl + 'teachers/' + id);
   }
 
   getTeachers(): Observable<Teacher[]> {
-    return this.http.get<Teacher[]>(this.apiUrl + 'teacher');
+    return this.http.get<Teacher[]>(this.apiUrl + 'teachers');
   }
 
   deleteTeacher(id: number) {
-    return this.http.delete(this.apiUrl + 'teacher/' + id);
+    return this.http.delete(this.apiUrl + 'teachers/' + id);
   }
 
   updateTeacher(id: number, teacher: Teacher) {
-    return this.http.put(this.apiUrl + 'teacher/' + id, teacher);
+    return this.http.put(this.apiUrl + 'teachers/' + id, teacher);
   }
 
 }

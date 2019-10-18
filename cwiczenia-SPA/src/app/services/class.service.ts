@@ -13,19 +13,19 @@ export class ClassService {
 constructor(private http: HttpClient) { }
 
   getClass(id: number): Observable<Class> {
-    return this.http.get<Class>(this.http + 'class/' + id);
+    return this.http.get<Class>(this.baseUrl + 'classes/' + id);
   }
 
   getClasses(): Observable<Class[]> {
-    return this.http.get<Class[]>(this.http + 'class');
+    return this.http.get<Class[]>(this.baseUrl + 'classes');
   }
 
   updateClass(id: number, clas: Class) {
-    return this.http.put(this.baseUrl + 'class/' + id, clas);
+    return this.http.put(this.baseUrl + 'classes/' + id, clas);
   }
 
   deleteClass(id: number) {
-    return this.http.delete(this.baseUrl + 'class/' + id);
+    return this.http.delete(this.baseUrl + 'classes/' + id);
   }
 
 }

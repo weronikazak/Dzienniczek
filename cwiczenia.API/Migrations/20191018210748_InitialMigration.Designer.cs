@@ -9,7 +9,7 @@ using cwiczenia.API.Data;
 namespace cwiczenia.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191016173834_InitialMigration")]
+    [Migration("20191018210748_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,11 +25,28 @@ namespace cwiczenia.API.Migrations
 
                     b.Property<string>("ClassName");
 
-                    b.Property<int>("TeacherId");
+                    b.Property<int>("Year");
 
                     b.HasKey("Id");
 
                     b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("cwiczenia.API.Models.Enrollments", b =>
+                {
+                    b.Property<int>("GradeId");
+
+                    b.Property<int>("StudentId");
+
+                    b.Property<int>("SubjectId");
+
+                    b.HasKey("GradeId", "StudentId", "SubjectId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Enrollments");
                 });
 
             modelBuilder.Entity("cwiczenia.API.Models.Grade", b =>
@@ -49,7 +66,7 @@ namespace cwiczenia.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ClassId");
+                    b.Property<int?>("ClassId");
 
                     b.Property<DateTime?>("DateOfBirth");
 
@@ -70,41 +87,41 @@ namespace cwiczenia.API.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("cwiczenia.API.Models.Teacher", b =>
+            modelBuilder.Entity("cwiczenia.API.Models.Subjects", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ClassId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<byte[]>("Photo");
-
-                    b.Property<string>("Surname");
+                    b.Property<string>("SubjectName");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassId")
-                        .IsUnique();
+                    b.ToTable("Subjects");
+                });
 
-                    b.ToTable("Teachers");
+            modelBuilder.Entity("cwiczenia.API.Models.Enrollments", b =>
+                {
+                    b.HasOne("cwiczenia.API.Models.Grade", "Grade")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("GradeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("cwiczenia.API.Models.Student", "Student")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("cwiczenia.API.Models.Subjects", "Subject")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("cwiczenia.API.Models.Student", b =>
                 {
                     b.HasOne("cwiczenia.API.Models.Class", "Class")
                         .WithMany("Students")
-                        .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("cwiczenia.API.Models.Teacher", b =>
-                {
-                    b.HasOne("cwiczenia.API.Models.Class", "Class")
-                        .WithOne("Teacher")
-                        .HasForeignKey("cwiczenia.API.Models.Teacher", "ClassId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ClassId");
                 });
 #pragma warning restore 612, 618
         }

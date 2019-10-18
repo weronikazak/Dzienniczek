@@ -13,8 +13,10 @@ namespace cwiczenia.API.Data
         Task<IEnumerable<Student>> GetStudents();
         Task<Student> GetStudent(int id);
         Task<IEnumerable<Grade>> GetGrades();
-        Task<IEnumerable<Teacher>> GetTeachers();
-        Task<Teacher> GetTeacher(int id);
+        // Task<IEnumerable<Subjects>> GetSubjects();
+        // Task<Subjects> GetSubject(int id);
+        // Task<IEnumerable<Teacher>> GetTeachers();
+        // Task<Teacher> GetTeacher(int id);
         Task<Class> GetClass(int id);
         Task<IEnumerable<Class>> GetClasses();
     }
