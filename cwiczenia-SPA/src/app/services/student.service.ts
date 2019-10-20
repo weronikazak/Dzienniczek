@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Student } from '../models/student';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Enrollment } from '../models/enrollment';
+import { url } from 'inspector';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +33,13 @@ constructor(private http: HttpClient) { }
 
   deleteStudent(id: number) {
     return this.http.delete<Student>(this.baseUrl + 'students/' + id);
+  }
+
+  getEnrollments(studentId: number): Observable<Enrollment[]> {
+    return this.http.get<Enrollment[]>(this.baseUrl + 'students/' + studentId + '/enrollments');
+  }
+
+  addEnrollment(enrollment: Enrollment) {
+    return this.http.post(this.baseUrl + '/students/enrollment', enrollment);
   }
 }

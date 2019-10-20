@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { routes } from 'src/routes';
 import { StudentAddComponent } from './students/student-add/student-add.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +23,10 @@ import { ClassService } from './services/class.service';
 import { TeacherService } from './services/teacher.service';
 import { SubjectService } from './services/subject.service';
 import { SubjectListComponent } from './subjects/subject-list/subject-list.component';
+import { StudentEnrollmentsComponent } from './students/student-enrollments/student-enrollments.component';
+import { StudentResolver } from './resolvers/student.resolver';
+import { AddEnrollmentComponent } from './subjects/add-enrollment/add-enrollment.component';
+import { EnrollmentResolver } from './resolvers/enrollment.resolver';
 
 
 @NgModule({
@@ -37,7 +41,9 @@ import { SubjectListComponent } from './subjects/subject-list/subject-list.compo
       DesktopComponent,
       ListFilterPipe,
       ClassListComponent,
-      SubjectListComponent
+      SubjectListComponent,
+      StudentEnrollmentsComponent,
+      AddEnrollmentComponent
    ],
    imports: [
       BrowserModule,
@@ -53,7 +59,9 @@ import { SubjectListComponent } from './subjects/subject-list/subject-list.compo
       ListFilterPipe,
       TeacherService,
       ClassService,
-      SubjectService
+      SubjectService,
+      StudentResolver,
+      EnrollmentResolver
    ],
    bootstrap: [
       AppComponent

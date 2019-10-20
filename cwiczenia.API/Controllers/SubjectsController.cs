@@ -21,19 +21,19 @@ namespace cwiczenia.API.Controllers
             _mapper = mapper;
         }
 
-        // [HttpGet]
-        // public async Task<IActionResult> GetSubjects() {
-        //     var subjects = await _repo.GetSubjects();
+        [HttpGet]
+        public async Task<IActionResult> GetSubjects() {
+            var subjects = await _repo.GetSubjects();
 
-        //     return Ok(subjects);
-        // }
+            return Ok(subjects);
+        }
 
-        // [HttpGet("{id}")]
-        // public async Task<IActionResult> GetSubject(int id) {
-        //     var subject = await _repo.GetSubject(id);
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetSubject(int id) {
+            var subject = await _repo.GetSubject(id);
 
-        //     return Ok(subject);
-        // }
+            return Ok(subject);
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddSubject(string subjectName) {

@@ -47,5 +47,24 @@ namespace cwiczenia.API.Controllers
 
             throw new Exception("Coś się nie udało podczas dodawania nowego studenta.");
         }
+
+        [HttpGet("{studentId}/enrollments")]
+        public async Task<IActionResult> GetEnrollments(int studentId) {
+            var enrollment = await _repo.GetEnrollments(studentId);
+
+            return Ok(enrollment);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEnrollment(EnrollmentForAddDto enrollmentForAddDto) {
+            var enrollment = _mapper.Map<Enrollments>(enrollmentForAddDto);
+
+            _repo.Add(enrollment);
+
+            if (await _repo.SaveAll())
+                return Ok(enrollment);
+
+            throw new Exception("Cos poszlo nie tak podszas dodawania oceny");
+        }
     }
 }

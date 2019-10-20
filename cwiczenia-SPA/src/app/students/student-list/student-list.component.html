@@ -18,11 +18,11 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Photo</th>
-      <th scope="col">Imię</th>
-      <th scope="col">Nazwisko</th>
+      <th scope="col">Imię i nazwisko</th>
       <th scope="col">Data urodzenia</th>
       <th scope="col">Wzrost</th>
       <th scope="col">Waga</th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -31,11 +31,11 @@
       <td>
         <img [src]="student.photo">
       </td>
-      <td><ngb-highlight [result]="student.name"></ngb-highlight></td>
-      <td><ngb-highlight [result]="student.surname"></ngb-highlight></td>
-      <td><ngb-highlight [result]="student.dateOfBirth | date"></ngb-highlight></td>
-      <td><ngb-highlight [result]="student.height | number"></ngb-highlight></td>
-      <td><ngb-highlight [result]="student.weight | number"></ngb-highlight></td>
+      <td><ngb-highlight [result]="student.fullName"></ngb-highlight></td>
+      <td>{{student.dateOfBirth | date}}</td>
+      <td>{{student.height | number}}</td>
+      <td>{{student.weight | number}}</td>
+      <td><button class="btn btn-primary" [routerLink]="['/uczen/', student.id]">Sprawdź</button></td>
     </tr>
     </tbody>
   </table>

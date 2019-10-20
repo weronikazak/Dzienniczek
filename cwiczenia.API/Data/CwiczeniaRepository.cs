@@ -37,6 +37,13 @@ namespace cwiczenia.API.Data
             return classes;
         }
 
+        public async Task<Enrollments> GetEnrollments(int studentId)
+        {
+            var enrollment = await _context.Enrollments.Include(s => s.Subject).Include(s => s.Grade).SingleOrDefaultAsync(s => s.StudentId == studentId);
+
+            return enrollment;
+        }
+
         public async Task<IEnumerable<Grade>> GetGrades()
         {
             var grades = await _context.Grades.ToListAsync();
@@ -57,17 +64,19 @@ namespace cwiczenia.API.Data
             return students;
         }
 
-        // public Task<Subjects> GetSubject(int id)
-        // {
-        //     throw new System.NotImplementedException();
-        // }
+        public async Task<Subjects> GetSubject(int id)
+        {
+            var subject = await _context.Subjects.FirstOrDefaultAsync(s => s.Id == id);
 
-        // public async Task<IEnumerable<Subjects>> GetSubjects()
-        // {
-        //     var subjects = await _context.Subjects.ToListAsync();
+            return subject;
+        }
 
-        //     return subjects;
-        // }
+        public async Task<IEnumerable<Subjects>> GetSubjects()
+        {
+            var subjects = await _context.Subjects.ToListAsync();
+
+            return subjects;
+        }
 
         // public async Task<Teacher> GetTeacher(int id)
         // {

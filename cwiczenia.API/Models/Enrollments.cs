@@ -8,7 +8,6 @@ namespace cwiczenia.API.Models
         public Student Student { get; set; }
         public int SubjectId { get; set; }
         public Subjects Subject { get; set; }
-        public int GradeId { get; set; }
-        public Grade Grade { get; set; }
+        public int Grade { get; set; }
     }
 }

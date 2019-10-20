@@ -3,7 +3,7 @@
         Szukaj przedmiot:
         <div class="">
           <!-- <input class="form-control ml-2" type="text" [(ngModel)]="searchModel"/> -->
-          <!-- <button class="btn btn-lg btn-primary" [routerLink]="['/uczen/dodaj']" routerLinkActive="router-link-active" > DODAJ UCZNIA</button> -->
+          <button class="btn btn-lg btn-primary" [routerLink]="['/przedmiot/dodaj']" routerLinkActive="router-link-active" > DODAJ PRZEDMIOT</button>
       
         </div>
         
@@ -19,10 +19,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let class of classes">
-      <th scope="row">{{ class.id }}</th>
-      <td><ngb-highlight [result]="class.name"></ngb-highlight></td>
-      <td><ngb-highlight [result]="class.year"></ngb-highlight></td>
+    <tr *ngFor="let subject of subjects">
+      <th scope="row">{{ subject.id }}</th>
+      <td><ngb-highlight [result]="subject.subjectName"></ngb-highlight></td>
+      <td><ngb-highlight [result]=""></ngb-highlight>Renata</td>
+      <td><button class="btn btn-primary">idk</button></td>
     </tr>
     </tbody>
   </table>

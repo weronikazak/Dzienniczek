@@ -1,0 +1,36 @@
+<div class="container">
+
+    <div class="form-group form-inline">
+        Szukaj przedmiotu:
+        <div class="">
+          <input class="form-control ml-2" type="text" [(ngModel)]="searchModel"/>  
+          <button class="btn btn-lg btn-primary" [routerLink]="[student.id, '/dodaj']" routerLinkActive="router-link-active" > DODAJ UCZNIA</button>    
+        </div>
+        
+    </div>
+
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Przedmiot</th>
+      <th scope="col">Nauczyciel</th>
+      <th scope="col">Ocena</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let enrollment of enrollment | listFilter: searchModel">
+      <th scope="row">{{ student.id }}</th>
+      <td>
+        <img [src]="student.photo">
+      </td>
+      <td><ngb-highlight [result]="enrollment.subject.subjectName"></ngb-highlight></td>
+      <td> <!-- {{enrollment.teacher.fullName}} --> Renata</td>
+      <td>{{enrollment.grade.gradeName}}</td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

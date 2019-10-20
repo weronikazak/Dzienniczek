@@ -8,10 +8,9 @@ namespace cwiczenia.API.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) {}
 
         public DbSet<Student> Students { get; set; }
-        public DbSet<Grade> Grades { get; set; }
         //public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Class> Classes { get; set; }
-        //public DbSet<Subjects> Subjects { get; set; }
+        public DbSet<Subjects> Subjects { get; set; }
         public DbSet<Enrollments> Enrollments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
@@ -23,7 +22,7 @@ namespace cwiczenia.API.Data
                 .HasForeignKey(s => s.ClassId);
 
             modelBuilder.Entity<Enrollments>()
-                .HasKey(bc => new { bc.GradeId, bc.StudentId, bc.SubjectId });
+                .HasKey(bc => new { bc.StudentId, bc.SubjectId });
 
             modelBuilder.Entity<Enrollments>()
                 .HasOne(s => s.Student)
@@ -34,11 +33,6 @@ namespace cwiczenia.API.Data
                 .HasOne(s => s.Subject)
                 .WithMany(s => s.Enrollments)
                 .HasForeignKey(s => s.SubjectId);  
-
-            modelBuilder.Entity<Enrollments>()
-                .HasOne(t => t.Grade)
-                .WithMany(u => u.Enrollments)
-                .HasForeignKey(i => i.GradeId);
         }
     }
 }
