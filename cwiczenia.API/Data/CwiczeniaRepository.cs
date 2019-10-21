@@ -39,15 +39,9 @@ namespace cwiczenia.API.Data
 
         public async Task<Enrollments> GetEnrollments(int studentId)
         {
-            var enrollment = await _context.Enrollments.Include(s => s.Subject).Include(s => s.Grade).SingleOrDefaultAsync(s => s.StudentId == studentId);
+            var enrollment = await _context.Enrollments.Include(s => s.Subject).SingleOrDefaultAsync(s => s.StudentId == studentId);
 
             return enrollment;
-        }
-
-        public async Task<IEnumerable<Grade>> GetGrades()
-        {
-            var grades = await _context.Grades.ToListAsync();
-            return grades;
         }
 
         public async Task<Student> GetStudent(int id)

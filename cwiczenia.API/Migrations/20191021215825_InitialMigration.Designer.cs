@@ -9,7 +9,7 @@ using cwiczenia.API.Data;
 namespace cwiczenia.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191018210748_InitialMigration")]
+    [Migration("20191021215825_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,31 +34,17 @@ namespace cwiczenia.API.Migrations
 
             modelBuilder.Entity("cwiczenia.API.Models.Enrollments", b =>
                 {
-                    b.Property<int>("GradeId");
-
                     b.Property<int>("StudentId");
 
                     b.Property<int>("SubjectId");
 
-                    b.HasKey("GradeId", "StudentId", "SubjectId");
+                    b.Property<int>("Grade");
 
-                    b.HasIndex("StudentId");
+                    b.HasKey("StudentId", "SubjectId");
 
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Enrollments");
-                });
-
-            modelBuilder.Entity("cwiczenia.API.Models.Grade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("GradeName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Grades");
                 });
 
             modelBuilder.Entity("cwiczenia.API.Models.Student", b =>
@@ -101,11 +87,6 @@ namespace cwiczenia.API.Migrations
 
             modelBuilder.Entity("cwiczenia.API.Models.Enrollments", b =>
                 {
-                    b.HasOne("cwiczenia.API.Models.Grade", "Grade")
-                        .WithMany("Enrollments")
-                        .HasForeignKey("GradeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("cwiczenia.API.Models.Student", "Student")
                         .WithMany("Enrollments")
                         .HasForeignKey("StudentId")

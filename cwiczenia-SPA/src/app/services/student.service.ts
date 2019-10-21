@@ -4,7 +4,6 @@ import { Student } from '../models/student';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Enrollment } from '../models/enrollment';
-import { url } from 'inspector';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +35,10 @@ constructor(private http: HttpClient) { }
   }
 
   getEnrollments(studentId: number): Observable<Enrollment[]> {
-    return this.http.get<Enrollment[]>(this.baseUrl + 'students/' + studentId + '/enrollments');
+    return this.http.get<Enrollment[]>(this.baseUrl + 'enrollment/' + studentId);
   }
 
   addEnrollment(enrollment: Enrollment) {
-    return this.http.post(this.baseUrl + '/students/enrollment', enrollment);
+    return this.http.post(this.baseUrl + 'enrollment', enrollment);
   }
 }

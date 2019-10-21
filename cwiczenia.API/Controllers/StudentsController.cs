@@ -48,23 +48,29 @@ namespace cwiczenia.API.Controllers
             throw new Exception("Coś się nie udało podczas dodawania nowego studenta.");
         }
 
-        [HttpGet("{studentId}/enrollments")]
-        public async Task<IActionResult> GetEnrollments(int studentId) {
-            var enrollment = await _repo.GetEnrollments(studentId);
+        [HttpDelete]
+        public async Task<IActionResult> DeleteStudent(int id) {
+            var student = await _repo.GetStudent(id);
 
-            return Ok(enrollment);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddEnrollment(EnrollmentForAddDto enrollmentForAddDto) {
-            var enrollment = _mapper.Map<Enrollments>(enrollmentForAddDto);
-
-            _repo.Add(enrollment);
+            _repo.Delete(student);
 
             if (await _repo.SaveAll())
-                return Ok(enrollment);
-
-            throw new Exception("Cos poszlo nie tak podszas dodawania oceny");
+                return NoContent();
+            
+            throw new Exception("Cos poszlo nie tak podczas kasowania ucznia");
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateStudent(StudentForUpdateDto studentForUpdateDto, int id) {
+            var student = await _repo.GetStudent(id);
+
+            _mapper.Map(student, studentForUpdateDto);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception("Cos poszło nie tak podczas aktualizowania informacji o uczniu.");
+        }
+
     }
 }

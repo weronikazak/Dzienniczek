@@ -36,8 +36,8 @@ namespace cwiczenia.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSubject(string subjectName) {
-            var subject = _mapper.Map<Student>(subjectName);
+        public async Task<IActionResult> AddSubject(Subjects subjectName) {
+            var subject = _mapper.Map<Subjects>(subjectName);
 
             _repo.Add(subject);
 

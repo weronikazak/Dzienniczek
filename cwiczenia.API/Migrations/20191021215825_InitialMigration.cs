@@ -22,19 +22,6 @@ namespace cwiczenia.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Grades",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    GradeName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Grades", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Subjects",
                 columns: table => new
                 {
@@ -78,17 +65,11 @@ namespace cwiczenia.API.Migrations
                 {
                     StudentId = table.Column<int>(nullable: false),
                     SubjectId = table.Column<int>(nullable: false),
-                    GradeId = table.Column<int>(nullable: false)
+                    Grade = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Enrollments", x => new { x.GradeId, x.StudentId, x.SubjectId });
-                    table.ForeignKey(
-                        name: "FK_Enrollments_Grades_GradeId",
-                        column: x => x.GradeId,
-                        principalTable: "Grades",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Enrollments", x => new { x.StudentId, x.SubjectId });
                     table.ForeignKey(
                         name: "FK_Enrollments_Students_StudentId",
                         column: x => x.StudentId,
@@ -102,11 +83,6 @@ namespace cwiczenia.API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Enrollments_StudentId",
-                table: "Enrollments",
-                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enrollments_SubjectId",
@@ -123,9 +99,6 @@ namespace cwiczenia.API.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Enrollments");
-
-            migrationBuilder.DropTable(
-                name: "Grades");
 
             migrationBuilder.DropTable(
                 name: "Students");

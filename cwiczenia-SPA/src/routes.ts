@@ -8,16 +8,19 @@ import { SubjectListComponent } from './app/subjects/subject-list/subject-list.c
 import { StudentEnrollmentsComponent } from './app/students/student-enrollments/student-enrollments.component';
 import { StudentResolver } from './app/resolvers/student.resolver';
 import { AddEnrollmentComponent } from './app/subjects/add-enrollment/add-enrollment.component';
+import { EnrollmentResolver } from './app/resolvers/enrollment.resolver';
+import { SubjectAddComponent } from './app/subjects/subject-add/subject-add.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'uczen', component: StudentListComponent},
+  { path: 'uczen/dodaj', component: StudentAddComponent},
   { path: 'uczen/:id', component: StudentEnrollmentsComponent, resolve: { student: StudentResolver}},
-  { path: 'uczen/:id/dodaj', component: AddEnrollmentComponent, resolve: { student: StudentResolver}},
+  { path: 'ocena/uczen/:id', component: AddEnrollmentComponent, resolve: { student: EnrollmentResolver}},
   { path: 'nauczyciel', component: TeacherListComponent},
   { path: 'klasa', component: ClassListComponent},
   { path: 'przedmiot', component: SubjectListComponent},
-  { path: 'przedmiot/dodaj', component: HomeComponent},
-  { path: 'uczen/dodaj', component: StudentAddComponent},
+  { path: 'przedmiot/dodaj', component: SubjectAddComponent},
+  { path: '**', component: HomeComponent },
 ];
 

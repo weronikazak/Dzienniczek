@@ -12,7 +12,6 @@ namespace cwiczenia.API.Data
         void Delete<T>(T entity) where T : class;
         Task<IEnumerable<Student>> GetStudents();
         Task<Student> GetStudent(int id);
-        Task<IEnumerable<Grade>> GetGrades();
         Task<IEnumerable<Subjects>> GetSubjects();
         Task<Subjects> GetSubject(int id);
         // Task<IEnumerable<Teacher>> GetTeachers();

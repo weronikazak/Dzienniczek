@@ -27,6 +27,9 @@ import { StudentEnrollmentsComponent } from './students/student-enrollments/stud
 import { StudentResolver } from './resolvers/student.resolver';
 import { AddEnrollmentComponent } from './subjects/add-enrollment/add-enrollment.component';
 import { EnrollmentResolver } from './resolvers/enrollment.resolver';
+import { SubjectAddComponent } from './subjects/subject-add/subject-add.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -43,15 +46,18 @@ import { EnrollmentResolver } from './resolvers/enrollment.resolver';
       ClassListComponent,
       SubjectListComponent,
       StudentEnrollmentsComponent,
-      AddEnrollmentComponent
+      AddEnrollmentComponent,
+      SubjectAddComponent,
    ],
    imports: [
       BrowserModule,
-      NgbModule,
+      NgbModule.forRoot(),
       FormsModule,
       ReactiveFormsModule,
       RouterModule.forRoot(routes),
-      HttpClientModule
+      HttpClientModule,
+      BsDropdownModule.forRoot(),
+      BrowserAnimationsModule,
    ],
    providers: [
       StudentService,

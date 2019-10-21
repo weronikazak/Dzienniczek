@@ -1,0 +1,28 @@
+<div class="col-md-8 order-md-1 container">
+
+  <h1 class="mb-3 text-uppercase text-center">dodaj przedmiot</h1>
+
+  <form [formGroup]="addSubjectForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="firstName">Nazwa przedmiotu</label>
+        <input type="text" class="form-control" id="subjectName" 
+        formControlName="subjectName">
+        <div class="invalid-feedback">
+          Potrzebny przedmiot.
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="lastName">Nauczyciel</label>
+        <input type="text" class="form-control" id="teacher" formControlName="teacher">
+        <div class="invalid-feedback">
+          Dodaj mordini nauczyciela.
+        </div>
+      </div>
+    </div>
+
+    <hr class="mb-4">
+    <button class="btn btn-primary btn-lg btn-block mb-4" [disabled]="!addSubjectForm.valid" type="submit">Dodaj przedmiot</button>
+  </form>
+</div>
