@@ -30,6 +30,8 @@ import { EnrollmentResolver } from './resolvers/enrollment.resolver';
 import { SubjectAddComponent } from './subjects/subject-add/subject-add.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -51,13 +53,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
    ],
    imports: [
       BrowserModule,
-      NgbModule.forRoot(),
+      NgbModule,
       FormsModule,
       ReactiveFormsModule,
       RouterModule.forRoot(routes),
       HttpClientModule,
       BsDropdownModule.forRoot(),
       BrowserAnimationsModule,
+      TypeaheadModule.forRoot(),
+      MatAutocompleteModule
    ],
    providers: [
       StudentService,

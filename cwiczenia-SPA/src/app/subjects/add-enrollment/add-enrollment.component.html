@@ -3,45 +3,13 @@
   <h1 class="mb-3 text-uppercase text-center">Wystaw ocene</h1>
 
   <form [formGroup]="addGradeForm" (ngSubmit)="onSubmit()">
-        <div class="btn-group" dropdown>
-            <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-                    aria-controls="dropdown-basic">
-              Przedmiot <span class="caret"></span>
-            </button>
-            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                role="menu" aria-labelledby="button-basic">
-                <div  *ngFor="let subject of subjectList">
-                    <li role="menuitem" formControlName="subject">{{subject.subjectName}}</li>
-                </div>
-            </ul>
-          </div>
 
-        <div class="btn-group" dropdown>
-            <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-                    aria-controls="dropdown-basic">
-              Uczniowie <span class="caret"></span>
-            </button>
-            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                role="menu" aria-labelledby="button-basic">
-                <div  *ngFor="let student of studentList">
-                    <li role="menuitem" formControlName="student">{{student.fullName}}</li>
-                </div>
-            </ul>
-          </div>
-          
-
-        <div class="btn-group" dropdown>
-            <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-                    aria-controls="dropdown-basic">
-              Oceny <span class="caret"></span>
-            </button>
-            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                role="menu" aria-labelledby="button-basic">
-                <div *ngFor="let grade of gradeList">
-                    <li role="menuitem" formControlName="grade">{{grade}}</li>
-                </div>
-            </ul>
-          </div>
+          <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="addGradeForm" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let student of studentList" >
+              {{student.fullName}}
+            </mat-option>
+          </mat-autocomplete>
 
     <hr class="mb-4">
     <button class="btn btn-primary btn-lg btn-block mb-4" [disabled]="!addGradeForm.valid" type="submit">Dodaj ocene</button>

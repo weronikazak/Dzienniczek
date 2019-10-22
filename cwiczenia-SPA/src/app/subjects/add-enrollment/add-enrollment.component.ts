@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { SubjectService } from 'src/app/services/subject.service';
 import { Subjects } from 'src/app/models/subjects';
 import { Student } from 'src/app/models/student';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/public_api';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-add-enrollment',
