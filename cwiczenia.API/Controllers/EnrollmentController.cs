@@ -32,6 +32,8 @@ namespace cwiczenia.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEnrollment(EnrollmentForAddDto enrollmentForAddDto) {
             var enrollment = _mapper.Map<Enrollments>(enrollmentForAddDto);
+            //enrollment.StudentId = enrollment.Student.Id;
+            //enrollment.SubjectId = enrollment.Subject.Id;
 
             _repo.Add(enrollment);
 

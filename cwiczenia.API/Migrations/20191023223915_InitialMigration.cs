@@ -63,13 +63,15 @@ namespace cwiczenia.API.Migrations
                 name: "Enrollments",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     StudentId = table.Column<int>(nullable: false),
                     SubjectId = table.Column<int>(nullable: false),
                     Grade = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Enrollments", x => new { x.StudentId, x.SubjectId });
+                    table.PrimaryKey("PK_Enrollments", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Enrollments_Students_StudentId",
                         column: x => x.StudentId,
@@ -83,6 +85,11 @@ namespace cwiczenia.API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Enrollments_StudentId",
+                table: "Enrollments",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enrollments_SubjectId",

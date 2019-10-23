@@ -61,7 +61,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
       BsDropdownModule.forRoot(),
       BrowserAnimationsModule,
       TypeaheadModule.forRoot(),
-      MatAutocompleteModule
    ],
    providers: [
       StudentService,

@@ -32,13 +32,18 @@ namespace cwiczenia.API.Migrations
 
             modelBuilder.Entity("cwiczenia.API.Models.Enrollments", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Grade");
+
                     b.Property<int>("StudentId");
 
                     b.Property<int>("SubjectId");
 
-                    b.Property<int>("Grade");
+                    b.HasKey("Id");
 
-                    b.HasKey("StudentId", "SubjectId");
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("SubjectId");
 

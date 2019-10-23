@@ -9,6 +9,10 @@ namespace cwiczenia.API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<Student, StudentForRegisterDto>().ReverseMap();
+            CreateMap<Enrollments, EnrollmentForAddDto>().ReverseMap();
+            CreateMap<StudentForUpdateDto, Student>().ReverseMap();
+            CreateMap<ClassForCreationDto, Class>().ReverseMap();
+            CreateMap<ClassForUpdateDto, Class>().ReverseMap();
         }
     }
 }

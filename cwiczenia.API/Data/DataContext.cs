@@ -21,18 +21,30 @@ namespace cwiczenia.API.Data
                 .WithMany(c => c.Students)
                 .HasForeignKey(s => s.ClassId);
 
-            modelBuilder.Entity<Enrollments>()
-                .HasKey(bc => new { bc.StudentId, bc.SubjectId });
+            modelBuilder.Entity<Student>()
+                .HasMany(u => u.Enrollments)
+                .WithOne(u => u.Student)
+                .HasForeignKey(u => u.StudentId);
 
-            modelBuilder.Entity<Enrollments>()
-                .HasOne(s => s.Student)
-                .WithMany(s => s.Enrollments)
-                .HasForeignKey(s => s.StudentId);
+            modelBuilder.Entity<Subjects>()
+                .HasMany(u => u.Enrollments)
+                .WithOne(u => u.Subject)
+                .HasForeignKey(u => u.SubjectId);
 
-            modelBuilder.Entity<Enrollments>()
-                .HasOne(s => s.Subject)
-                .WithMany(s => s.Enrollments)
-                .HasForeignKey(s => s.SubjectId);  
+            // modelBuilder.Entity<Enrollments>()
+            //     .HasKey(bc => new { bc.StudentId, bc.SubjectId });
+
+            // modelBuilder.Entity<Enrollments>()
+            //     .HasOne(s => s.Student)
+            //     .WithMany(s => s.Enrollments)
+            //     .HasForeignKey(s => s.StudentId)
+            //     .OnDelete(DeleteBehavior.Restrict);
+
+            // modelBuilder.Entity<Enrollments>()
+            //     .HasOne(s => s.Subject)
+            //     .WithMany(s => s.Enrollments)
+            //     .HasForeignKey(s => s.SubjectId)
+            //     .OnDelete(DeleteBehavior.Restrict);  
         }
     }
 }

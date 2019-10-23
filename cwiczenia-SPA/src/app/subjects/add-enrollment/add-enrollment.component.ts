@@ -17,7 +17,15 @@ import { Subject } from 'rxjs';
 })
 export class AddEnrollmentComponent implements OnInit {
   addGradeForm: FormGroup;
-  newEnrollment: Enrollment;
+
+  newEnrollment: Enrollment = {
+    grade: null,
+    student: null,
+    subject: null,
+    studentId: null,
+    subjectId: null
+  };
+
   subjectList: Subjects[];
   studentList: Student[];
   gradeList: number[] = [1, 2, 3, 4, 5, 6];
@@ -32,11 +40,15 @@ export class AddEnrollmentComponent implements OnInit {
 
   createEnrollment() {
     this.addGradeForm = this.fb.group({
-      student: [''],
-      subject: [''],
-      grade: [5]
+      studentId: '',
+      subjectId: '',
+      student: [new Student],
+      subject: [new Subject],
+      grade: []
     });
   }
+
+  get diagnostic() { return JSON.stringify(this.addGradeForm.value); }
 
   loadLists() {
     this.studentService.getStudents().subscribe((students: Student[]) => {
@@ -58,6 +70,8 @@ export class AddEnrollmentComponent implements OnInit {
       });
       this.addGradeForm.reset();
     }
+    console.log(this.addGradeForm.value);
   }
+
 
 }
