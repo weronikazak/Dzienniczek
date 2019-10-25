@@ -18,13 +18,7 @@ import { Subject } from 'rxjs';
 export class AddEnrollmentComponent implements OnInit {
   addGradeForm: FormGroup;
 
-  newEnrollment: Enrollment = {
-    grade: null,
-    student: null,
-    subject: null,
-    studentId: null,
-    subjectId: null
-  };
+  newEnrollment: Enrollment;
 
   subjectList: Subjects[];
   studentList: Student[];
@@ -40,8 +34,6 @@ export class AddEnrollmentComponent implements OnInit {
 
   createEnrollment() {
     this.addGradeForm = this.fb.group({
-      studentId: '',
-      subjectId: '',
       student: [new Student],
       subject: [new Subject],
       grade: []
@@ -62,15 +54,17 @@ export class AddEnrollmentComponent implements OnInit {
   onSubmit() {
     if (this.addGradeForm.valid) {
       this.newEnrollment = Object.assign({}, this.addGradeForm.value);
+      this.newEnrollment.studentId = this.newEnrollment.student.id;
+      this.newEnrollment.subjectId = this.newEnrollment.subject.id;
       this.studentService.addEnrollment(this.newEnrollment).subscribe(() => {
         this.alertify.success('Dodano ocene');
         this.route.navigate(['/uczen']);
       }, error => {
         this.alertify.error(error);
       });
-      this.addGradeForm.reset();
+      // this.addGradeForm.reset();
     }
-    console.log(this.addGradeForm.value);
+    console.log(this.newEnrollment);
   }
 
 

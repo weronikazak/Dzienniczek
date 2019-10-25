@@ -9,8 +9,8 @@ using cwiczenia.API.Data;
 namespace cwiczenia.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191023223915_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20191024234242_Mi")]
+    partial class Mi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace cwiczenia.API.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Mi : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace cwiczenia.API.Models
 {
@@ -8,6 +9,6 @@ namespace cwiczenia.API.Models
         public string ClassName { get; set; }
         public int Year { get; set; }
         //public int TeacherId { get; set; }
-        public virtual ICollection<Student> Students { get; set; }
+        public ICollection<Student> Students { get; set; }
     }
 }

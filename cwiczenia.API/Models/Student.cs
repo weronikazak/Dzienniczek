@@ -20,8 +20,8 @@ namespace cwiczenia.API.Models
         public decimal Height { get; set; }
         public float Weight { get; set; }
         public int? ClassId { get; set; }
-        public virtual Class Class { get; set; }
-        public virtual ICollection<Enrollments> Enrollments { get; set; }
+        public Class Class { get; set; }
+        public ICollection<Enrollments> Enrollments { get; set; }
 
 
     }

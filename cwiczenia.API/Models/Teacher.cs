@@ -15,7 +15,7 @@ namespace cwiczenia.API.Models
         public string Photo { get; set; }
         //public int ClassId { get; set; }
         //public Class Class { get; set; }
-        public int SubjectId { get; set; }
-        public virtual ICollection<Subjects> Subjects { get; set; }
+        // public int SubjectId { get; set; }
+        //public ICollection<Subjects> Subjects { get; set; }
     }
 }
