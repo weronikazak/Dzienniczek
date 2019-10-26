@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'uczen', component: StudentListComponent},
   { path: 'uczen/dodaj', component: StudentAddComponent},
-  { path: 'uczen/:id', component: StudentEnrollmentsComponent, resolve: { student: StudentResolver}},
+  { path: 'ocena/:id', component: StudentEnrollmentsComponent, resolve: { student: StudentResolver}},
   { path: 'ocena/uczen/:id', component: AddEnrollmentComponent, resolve: { student: EnrollmentResolver}},
   { path: 'nauczyciel', component: TeacherListComponent},
   { path: 'klasa', component: ClassListComponent},

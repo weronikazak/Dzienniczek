@@ -6,17 +6,17 @@
     {{diagnostic}}
     <div class="form-group">
       <label for="student">Uczeń</label>
-      <select class="form-control" id="student" required formControlName="student">
+      <select class="form-control" id="student" required formControlName="studentId">
         <option *ngFor="let student of studentList" name="student"
-         [ngValue]="student">
+         [ngValue]="student.id">
          {{student.fullName}}</option>
       </select>
       </div>
 
       <div class="form-group">
         <label for="subject">Przedmiot</label>
-        <select class="form-control" id="subject" required formControlName="subject">
-          <option *ngFor="let subject of subjectList" [ngValue]="subject">
+        <select class="form-control" id="subject" required formControlName="subjectId">
+          <option *ngFor="let subject of subjectList" [ngValue]="subject.id">
             {{subject.subjectName}}</option>
         </select>
       </div>

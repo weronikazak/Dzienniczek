@@ -37,9 +37,20 @@ namespace cwiczenia.API.Data
             return classes;
         }
 
-        public async Task<Enrollments> GetEnrollments(int studentId)
+        public async Task<IEnumerable<Enrollments>> GetEnrollments(int studentId)
         {
-            var enrollment = await _context.Enrollments.Include(s => s.Subject).SingleOrDefaultAsync(s => s.StudentId == studentId);
+
+            var student = await _context.Students.Include(u => u.Enrollments)
+                                .Include(u => u.Class).FirstOrDefaultAsync(u => u.Id == studentId);
+
+            return student.Enrollments;
+        }
+
+        public async Task<IEnumerable<Enrollments>> GetEnrollment()
+        {
+            var enrollment = await _context.Enrollments.
+                            Include(s => s.Subject).Include(u => u.Student).
+                            ToListAsync();
 
             return enrollment;
         }

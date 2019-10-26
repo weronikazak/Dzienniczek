@@ -22,23 +22,35 @@ namespace cwiczenia.API.Controllers
         }
 
         
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetEnrollments(int id) {
+        [HttpGet("{studentId}")]
+        public async Task<IActionResult> GetEnrollments(int studentId) {
             // id = studentId
-            var enrollments = await _repo.GetEnrollments(id);
+            var enrollments = await _repo.GetEnrollments(studentId);
+            //var enrollments = await _repo.GetEnrollment();
+
             return Ok(enrollments);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEnrollment(Enrollments enrollmentForAddDto) {
-            //var enrollment = _mapper.Map<Enrollments>(enrollmentForAddDto);
-            //enrollment.StudentId = enrollment.Student.Id;
-            //enrollment.SubjectId = enrollment.Subject.Id;
+        public async Task<IActionResult> AddEnrollment(EnrollmentForAddDto enrollmentForAddDto) {
+            var enrollment = _mapper.Map<Enrollments>(enrollmentForAddDto);
 
-            _repo.Add(enrollmentForAddDto);
+            var student = await _repo.GetStudent(enrollment.StudentId);
+            var subject = await _repo.GetSubject(enrollment.SubjectId);
+
+            if (student == null)
+                throw new Exception("Uzytkownik nie istnieje");
+
+            if (subject == null)
+                throw new Exception("Przedmiot nie istnieje");
+
+            enrollment.Student = student;
+            enrollment.Subject = subject;
+
+            _repo.Add<Enrollments>(enrollment);
 
             if (await _repo.SaveAll())
-                return Ok(enrollmentForAddDto);
+                return Ok(enrollment);
 
             throw new Exception("Cos poszlo nie tak podszas dodawania oceny");
         }

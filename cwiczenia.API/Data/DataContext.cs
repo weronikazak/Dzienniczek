@@ -19,8 +19,6 @@ namespace cwiczenia.API.Data
             // modelBuilder.Entity<Enrollments>()
             //     .HasKey(bc => new { bc.StudentId, bc.SubjectId });
 
-            modelBuilder.Entity<Student>().HasKey(u => u.Id);
-
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.Class)
                 .WithMany(c => c.Students)

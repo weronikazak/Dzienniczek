@@ -18,6 +18,7 @@ namespace cwiczenia.API.Data
         // Task<Teacher> GetTeacher(int id);
         Task<Class> GetClass(int id);
         Task<IEnumerable<Class>> GetClasses();
-        Task<Enrollments> GetEnrollments(int studentId);
+        Task<IEnumerable<Enrollments>> GetEnrollments(int studentId);
+        Task<IEnumerable<Enrollments>> GetEnrollment();
     }
 }
