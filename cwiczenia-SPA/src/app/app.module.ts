@@ -32,6 +32,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { AddClassComponent } from './class/add-class/add-class.component';
+import { AddTeacherComponent } from './teachers/add-teacher/add-teacher.component';
+import { ClassStudentsComponent } from './class/class-students/class-students.component';
 
 
 @NgModule({
@@ -50,6 +53,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
       StudentEnrollmentsComponent,
       AddEnrollmentComponent,
       SubjectAddComponent,
+      AddClassComponent,
+      AddTeacherComponent,
+      ClassStudentsComponent
    ],
    imports: [
       BrowserModule,

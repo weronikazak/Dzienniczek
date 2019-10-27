@@ -39,6 +39,12 @@ namespace cwiczenia.API.Controllers
         public async Task<IActionResult> AddStudent(StudentForRegisterDto studentForRegister) {
             var student = _mapper.Map<Student>(studentForRegister);
 
+            var classe = _repo.GetClass((int)student.ClassId);
+
+            if (classe == null) {
+                throw new Exception("Taka klasa nie istnieje");
+            }
+
             _repo.Add(student);
 
             if (await _repo.SaveAll()) {

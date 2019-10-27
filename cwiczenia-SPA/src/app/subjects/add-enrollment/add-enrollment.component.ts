@@ -54,8 +54,6 @@ export class AddEnrollmentComponent implements OnInit {
   onSubmit() {
     if (this.addGradeForm.valid) {
       this.newEnrollment = Object.assign({}, this.addGradeForm.value);
-      // this.newEnrollment.studentId = this.newEnrollment.student.id;
-      // this.newEnrollment.subjectId = this.newEnrollment.subject.id;
       this.studentService.addEnrollment(this.newEnrollment).subscribe(() => {
         this.alertify.success('Dodano ocene');
         this.route.navigate(['/uczen']);

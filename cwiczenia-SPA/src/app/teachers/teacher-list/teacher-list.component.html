@@ -6,7 +6,7 @@
         Szukaj ucznia:
         <div class="">
           <!-- <input class="form-control ml-2" type="text" [(ngModel)]="searchModel"/> -->
-          <button class="btn btn-lg btn-primary" [routerLink]="['/uczen/dodaj']" routerLinkActive="router-link-active" > DODAJ UCZNIA</button>
+          <button class="btn btn-lg btn-primary" [routerLink]="['/nauczyciel/dodaj']" routerLinkActive="router-link-active" > DODAJ NAUCZYCIELA</button>
       
         </div>
         
@@ -18,9 +18,9 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Photo</th>
-      <th scope="col">Imię</th>
-      <th scope="col">Nazwisko</th>
+      <th scope="col">Imię i nazwisko</th>
       <th scope="col">Klasa</th>
+      <th scope="col">Przedmioty</th>
     </tr>
     </thead>
     <tbody>
@@ -29,9 +29,9 @@
       <td>
         <img [src]="teacher.photo">
       </td>
-      <td><ngb-highlight [result]="teacher.name"></ngb-highlight></td>
-      <td><ngb-highlight [result]="teacher.surname"></ngb-highlight></td>
+      <td><ngb-highlight [result]="teacher.fullName"></ngb-highlight></td>
       <td><ngb-highlight [result]="teacher.class?.name"></ngb-highlight></td>
+      <td><ngb-highlight [result]="teacher.subjects"></ngb-highlight></td>
     </tr>
     </tbody>
   </table>

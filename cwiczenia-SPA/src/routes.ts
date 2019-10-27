@@ -10,6 +10,9 @@ import { StudentResolver } from './app/resolvers/student.resolver';
 import { AddEnrollmentComponent } from './app/subjects/add-enrollment/add-enrollment.component';
 import { EnrollmentResolver } from './app/resolvers/enrollment.resolver';
 import { SubjectAddComponent } from './app/subjects/subject-add/subject-add.component';
+import { AddTeacherComponent } from './app/teachers/add-teacher/add-teacher.component';
+import { AddClassComponent } from './app/class/add-class/add-class.component';
+import { ClassStudentsComponent } from './app/class/class-students/class-students.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,7 +21,10 @@ export const routes: Routes = [
   { path: 'ocena/:id', component: StudentEnrollmentsComponent, resolve: { student: StudentResolver}},
   { path: 'ocena/uczen/:id', component: AddEnrollmentComponent, resolve: { student: EnrollmentResolver}},
   { path: 'nauczyciel', component: TeacherListComponent},
+  { path: 'nauczyciel/dodaj', component: AddTeacherComponent},
   { path: 'klasa', component: ClassListComponent},
+  { path: 'klasa/dodaj', component: AddClassComponent},
+  { path: 'klasa/:id', component: ClassStudentsComponent},
   { path: 'przedmiot', component: SubjectListComponent},
   { path: 'przedmiot/dodaj', component: SubjectAddComponent},
   { path: '**', component: HomeComponent },

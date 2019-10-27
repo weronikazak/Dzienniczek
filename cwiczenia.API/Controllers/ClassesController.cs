@@ -28,9 +28,21 @@ namespace cwiczenia.API.Controllers
             return Ok(classes);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetClass(int id) {
+            var classe = await _repo.GetClass(id);
+
+            return Ok(classe);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddClass(ClassForCreationDto classForCreationDto) {
             var clas = _mapper.Map<Class>(classForCreationDto);
+
+            var teacher = _repo.GetTeacher(clas.TeacherId);
+
+            if (teacher == null)
+                throw new Exception("Podany nauczyciel nie istnieje");
 
             _repo.Add(clas);
 
@@ -66,6 +78,7 @@ namespace cwiczenia.API.Controllers
 
             throw new Exception("Coś poszło nie tak podczas usuwania klasy");
         }
+
 
     }
 }

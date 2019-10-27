@@ -1,0 +1,53 @@
+<div class="col-md-8 order-md-1 container">
+
+    <h1 class="mb-3 text-uppercase text-center">dodaj nowego nauczyciela</h1>
+  
+    <form [formGroup]="addTeacherForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="firstName">Imię</label>
+          <input type="text" class="form-control" id="name" 
+          formControlName="name">
+          <div class="invalid-feedback">
+            Valid first name is required.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="lastName">Nazwisko</label>
+          <input type="text" class="form-control" id="surname"
+          formControlName="surname">
+          <div class="invalid-feedback">
+            Valid last name is required.
+          </div>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="email">Data urodzenia </label>
+        <input type="email" class="form-control" id="dateOfBirth"
+        formControlName="dateOfBirth">
+        <div class="invalid-feedback">
+          Please enter a valid email address for shipping updates.
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label for="clas">Przedmiot wykładany</label>
+          <select class="form-control" id="subject" required formControlName="subjectId">
+            <option *ngFor="let subject of subjectList" [ngValue]="subject.id">
+              {{subject.subjectName}}</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label for="clas">Wychowawca (opcjonalne)</label>
+          <select class="form-control" id="clas" required formControlName="classId">
+            <option *ngFor="let class of classList" [ngValue]="class.id">
+              {{class.className}}</option>
+          </select>
+        </div>
+  
+      <hr class="mb-4">
+      <button class="btn btn-primary btn-lg btn-block mb-4" [disabled]="!addTeacherForm.valid" type="submit">Dodaj nauczyciela</button>
+    </form>
+  </div>

@@ -7,7 +7,9 @@ namespace cwiczenia.API.Models
     {
         public int Id { get; set; }
         public string SubjectName { get; set; }
+        public int? TeacherId { get; set; }
+        public Teacher Teacher { get; set; }
         public ICollection<Enrollments> Enrollments { get; set; }
-        //public virtual ICollection<Teacher> Teachers { get; set; }
+
     }
 }

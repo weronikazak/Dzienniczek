@@ -21,43 +21,59 @@ namespace cwiczenia.API.Controllers
             _mapper = mapper;
         }
 
-        // [HttpGet]
-        // public async Task<IActionResult> GetTeachers() {
-        //     var teachers = await _repo.GetTeachers();
+        [HttpGet]
+        public async Task<IActionResult> GetTeachers() {
+            var teachers = await _repo.GetTeachers();
 
-        //     return Ok(teachers);
-        // }
+            return Ok(teachers);
+        }
 
-        // [HttpGet("{id}")]
-        // public async Task<IActionResult> GetTeacher(int id) {
-        //     var teacher = await _repo.GetTeacher(id);
+        [HttpPost]
+        public async Task<IActionResult> AddTeacher(TeacherForRegisterDto teacherForRegisterDto) {
+            var teacher = _mapper.Map<Teacher>(teacherForRegisterDto);
 
-        //     return Ok(teacher);
-        // }
+            if (await _repo.GetSubject(teacher.Id) == null)
+                throw new Exception("Nie ma takiego przedmiotu.");
 
-        // [HttpDelete("{id}")]
-        // public async Task<IActionResult> DeleteTeacher(int id) {
-        //     var teacher = await _repo.GetTeacher(id);
+            if (teacherForRegisterDto.ClassId != null) {
+                if (await _repo.GetClass((int)teacher.ClassId) == null) {
+                throw new Exception("Nie ma takiej klasy");
+                }
+            }
 
-        //     _repo.Delete(teacher);
+            return Ok(teacher);
+        }
 
-        //     if (await _repo.SaveAll())
-        //         return NoContent();
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTeacher(int id) {
+            var teacher = await _repo.GetTeacher(id);
 
-        //     throw new Exception("Cos poszlo nie tak podczas usuwania");
-        // }
+            return Ok(teacher);
+        }
 
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> UpdateTeacher(int id, TeacherForUpdateDto teacherForUpdateDto) {
-        //     var teacher = await _repo.GetTeacher(id);
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTeacher(int id) {
+            var teacher = await _repo.GetTeacher(id);
 
-        //     _mapper.Map(teacher, teacherForUpdateDto);
+            _repo.Delete(teacher);
 
-        //     if (await _repo.SaveAll())
-        //         return NoContent();
+            if (await _repo.SaveAll())
+                return NoContent();
 
-        //     throw new Exception("Cos poszlo nie tak ppodczas update'wania nauczyciela");
+            throw new Exception("Cos poszlo nie tak podczas usuwania");
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTeacher(int id, TeacherForUpdateDto teacherForUpdateDto) {
+            var teacher = await _repo.GetTeacher(id);
+
+            _mapper.Map(teacher, teacherForUpdateDto);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception("Cos poszlo nie tak ppodczas update'wania nauczyciela");
             
-        // }
+        }
     }
 }

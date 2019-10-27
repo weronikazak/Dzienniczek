@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using cwiczenia.API.Models;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace cwiczenia.API.Data
@@ -32,18 +33,16 @@ namespace cwiczenia.API.Data
 
         public async Task<IEnumerable<Class>> GetClasses()
         {
-            var classes = await _context.Classes.ToListAsync();
+            var classes = await _context.Classes.OrderBy(u => u.ClassName).ToListAsync();
 
             return classes;
         }
 
         public async Task<IEnumerable<Enrollments>> GetEnrollments(int studentId)
         {
-
-            var student = await _context.Students.Include(u => u.Enrollments)
-                                .Include(u => u.Class).FirstOrDefaultAsync(u => u.Id == studentId);
-
-            return student.Enrollments;
+            var enrollments = await _context.Enrollments.Include(u => u.Student)
+                                        .Include(u => u.Subject).Where(u => u.StudentId == studentId).ToListAsync();
+            return enrollments;
         }
 
         public async Task<IEnumerable<Enrollments>> GetEnrollment()
@@ -64,7 +63,14 @@ namespace cwiczenia.API.Data
 
         public async Task<IEnumerable<Student>> GetStudents()
         {
-            var students = await _context.Students.ToListAsync();
+            var students = await _context.Students.OrderBy(u => u.Surname).ToListAsync();
+
+            return students;
+        }
+
+        public async Task<IEnumerable<Student>> GetStudentsForClass(int id)
+        {
+            var students = await _context.Students.Where(u => u.ClassId == id).OrderBy(u => u.Surname).ToListAsync();
 
             return students;
         }
@@ -78,24 +84,24 @@ namespace cwiczenia.API.Data
 
         public async Task<IEnumerable<Subjects>> GetSubjects()
         {
-            var subjects = await _context.Subjects.ToListAsync();
+            var subjects = await _context.Subjects.OrderBy(u => u.SubjectName).ToListAsync();
 
             return subjects;
         }
 
-        // public async Task<Teacher> GetTeacher(int id)
-        // {
-        //    var teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.Id == id);
+        public async Task<Teacher> GetTeacher(int id)
+        {
+           var teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.Id == id);
 
-        //    return teacher;
-        // }
+           return teacher;
+        }
 
-        // public async Task<IEnumerable<Teacher>> GetTeachers()
-        // {
-        //     var teachers = await _context.Teachers.ToListAsync();
+        public async Task<IEnumerable<Teacher>> GetTeachers()
+        {
+            var teachers = await _context.Teachers.OrderBy(u => u.Surname).ToListAsync();
 
-        //     return teachers;
-        // }
+            return teachers;
+        }
 
         public async Task<bool> SaveAll()
         {

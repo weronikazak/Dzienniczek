@@ -20,6 +20,10 @@ constructor(private http: HttpClient) { }
     return this.http.get<Class[]>(this.baseUrl + 'classes');
   }
 
+  addClass(clas: Class) {
+    return this.http.post(this.baseUrl + 'classes', clas);
+  }
+
   updateClass(id: number, clas: Class) {
     return this.http.put(this.baseUrl + 'classes/' + id, clas);
   }

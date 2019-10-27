@@ -1,0 +1,38 @@
+<div class="col-md-8 order-md-1 container">
+
+  <h1 class="mb-3 text-uppercase text-center">dodaj nowa klase</h1>
+
+  <form [formGroup]="addClassForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+
+      <div class="col-md-6 mb-3">
+        <label for="className">Nazwa</label>
+        <input type="text" class="form-control" id="className" 
+        formControlName="className">
+        <div class="invalid-feedback">
+          Valid className is required.
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label for="year">Rocznik</label>
+        <input type="number" class="form-control" id="year"
+        formControlName="year">
+        <div class="invalid-feedback">
+          Valid year is required.
+        </div>
+      </div>
+    </div>
+
+      <div class="form-group">
+        <label for="clas">Nauczyciel</label>
+        <select class="form-control" id="teacher" required formControlName="teacherId">
+          <option *ngFor="let teacher of teacherList" [ngValue]="teacher.id">
+            {{teacher.fullName}}</option>
+        </select>
+      </div>
+
+    <hr class="mb-4">
+    <button class="btn btn-primary btn-lg btn-block mb-4" [disabled]="!addClassForm.valid" type="submit">Dodaj klase</button>
+  </form>
+</div>

@@ -1,18 +1,13 @@
 using System;
 using System.Collections.Generic;
+using cwiczenia.API.Models;
 
-namespace cwiczenia.API.Models
+namespace cwiczenia.API.Dtos
 {
-    public class Teacher
+    public class TeacherForRegisterDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string FullName { 
-            get {
-                return Name + " " + Surname;
-            } 
-        }
         public string Photo { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int? ClassId { get; set; }

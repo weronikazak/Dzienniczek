@@ -6,7 +6,7 @@
         Szukaj ucznia:
         <div class="">
           <!-- <input class="form-control ml-2" type="text" [(ngModel)]="searchModel"/> -->
-          <!-- <button class="btn btn-lg btn-primary" [routerLink]="['/uczen/dodaj']" routerLinkActive="router-link-active" > DODAJ UCZNIA</button> -->
+          <button class="btn btn-lg btn-primary" [routerLink]="['/klasa/dodaj']" routerLinkActive="router-link-active" > DODAJ KLASE</button>
       
         </div>
         
@@ -19,17 +19,19 @@
       <th scope="col">#</th>
       <th scope="col">Klasa</th>
       <th scope="col">Rocznik</th>
-      <th scope="col">Imię wychowawcy</th>
-      <th scope="col">Nazwisko wychowawcy</th>
+      <th scope="col">Wychowawca</th>
+      <th scope="col">Lista uczniów</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let class of classes">
       <th scope="row">{{ class.id }}</th>
-      <td><ngb-highlight [result]="class.name"></ngb-highlight></td>
+      <td><ngb-highlight [result]="class.className"></ngb-highlight></td>
       <td><ngb-highlight [result]="class.year"></ngb-highlight></td>
-      <td><ngb-highlight [result]="class.teacher?.name"></ngb-highlight></td>
-      <td><ngb-highlight [result]="class.teacher?.surname"></ngb-highlight></td>
+      <td><ngb-highlight [result]="class.teacher.fullName"></ngb-highlight></td>
+      <td>
+        <button class="btn btn-primary" [routerLink]="['/klasa/', class.id]" routerLinkActive="router-link-active" >Uczniowie</button>
+      </td>
     </tr>
     </tbody>
   </table>

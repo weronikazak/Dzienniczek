@@ -20,6 +20,10 @@ constructor(private http: HttpClient) { }
     return this.http.get<Teacher[]>(this.apiUrl + 'teachers');
   }
 
+  addTeacher(teacher: Teacher) {
+    return this.http.post(this.apiUrl + 'teachers', teacher);
+  }
+
   deleteTeacher(id: number) {
     return this.http.delete(this.apiUrl + 'teachers/' + id);
   }

@@ -23,6 +23,8 @@ namespace cwiczenia.API.Migrations
 
                     b.Property<string>("ClassName");
 
+                    b.Property<int>("TeacherId");
+
                     b.Property<int>("Year");
 
                     b.HasKey("Id");
@@ -83,9 +85,34 @@ namespace cwiczenia.API.Migrations
 
                     b.Property<string>("SubjectName");
 
+                    b.Property<int>("TeacherId");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("TeacherId");
+
                     b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("cwiczenia.API.Models.Teacher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ClassId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Photo");
+
+                    b.Property<string>("Surname");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId")
+                        .IsUnique();
+
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("cwiczenia.API.Models.Enrollments", b =>
@@ -106,6 +133,21 @@ namespace cwiczenia.API.Migrations
                     b.HasOne("cwiczenia.API.Models.Class", "Class")
                         .WithMany("Students")
                         .HasForeignKey("ClassId");
+                });
+
+            modelBuilder.Entity("cwiczenia.API.Models.Subjects", b =>
+                {
+                    b.HasOne("cwiczenia.API.Models.Teacher", "Teacher")
+                        .WithMany("Subjects")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("cwiczenia.API.Models.Teacher", b =>
+                {
+                    b.HasOne("cwiczenia.API.Models.Class", "Class")
+                        .WithOne("Teacher")
+                        .HasForeignKey("cwiczenia.API.Models.Teacher", "ClassId");
                 });
 #pragma warning restore 612, 618
         }
