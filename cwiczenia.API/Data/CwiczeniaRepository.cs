@@ -70,14 +70,28 @@ namespace cwiczenia.API.Data
 
         public async Task<IEnumerable<Student>> GetStudentsForClass(int id)
         {
-            var students = await _context.Students.Where(u => u.ClassId == id).OrderBy(u => u.Surname).ToListAsync();
+            var students = await _context.Students.Include(u => u.Class)
+            .Where(u => u.ClassId == id).OrderBy(u => u.Surname).ToListAsync();
 
             return students;
         }
 
+        // public async Task<IEnumerable<TeacherSubjects>> GetStudentClass() {
+        //     var ts = await _context.TeacherSubjects.Include(u => u.Subject).Include(u => u.Teacher)
+        //         .Where(u => u.TeacherId == teacherId && u.SubjectId == subjectId).ToListAsync();
+        // }
+        public async Task<IEnumerable<TeacherSubjects>> GetTeacherSubjects() {
+            var ts = await _context.TeacherSubjects.Include(u => u.Subject).Include(u => u.Teacher)
+                .OrderBy(u => u.Teacher.Surname).ToListAsync();
+
+            return ts;
+        }
+
+
+
         public async Task<Subjects> GetSubject(int id)
         {
-            var subject = await _context.Subjects.FirstOrDefaultAsync(s => s.Id == id);
+            var subject = await _context.Subjects.Include(t => t.TeacherSubjects).FirstOrDefaultAsync(s => s.Id == id);
 
             return subject;
         }
@@ -91,14 +105,14 @@ namespace cwiczenia.API.Data
 
         public async Task<Teacher> GetTeacher(int id)
         {
-           var teacher = await _context.Teachers.FirstOrDefaultAsync(t => t.Id == id);
+           var teacher = await _context.Teachers.Include(t => t.TeacherSubjects).FirstOrDefaultAsync(t => t.Id == id);
 
            return teacher;
         }
 
         public async Task<IEnumerable<Teacher>> GetTeachers()
         {
-            var teachers = await _context.Teachers.OrderBy(u => u.Surname).ToListAsync();
+            var teachers = await _context.Teachers.Include(t => t.TeacherSubjects).OrderBy(u => u.Surname).ToListAsync();
 
             return teachers;
         }

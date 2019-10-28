@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Teacher } from 'src/app/models/teacher';
 import { TeacherService } from 'src/app/services/teacher.service';
+import { TeacherSubjects } from 'src/app/models/teacherSubjects';
 
 @Component({
   selector: 'app-teacher-list',
@@ -8,8 +9,8 @@ import { TeacherService } from 'src/app/services/teacher.service';
   styleUrls: ['./teacher-list.component.css']
 })
 export class TeacherListComponent implements OnInit {
-  teachers: Teacher[];
-  @Input() searchModel: Teacher;
+  teachers: TeacherSubjects[];
+  // @Input() searchModel: Teacher;
 
   constructor(private teacherService: TeacherService) { }
 
@@ -18,7 +19,7 @@ export class TeacherListComponent implements OnInit {
   }
 
   loadTeachers() {
-    this.teacherService.getTeachers().subscribe((teachers: Teacher[]) => {
+    this.teacherService.getTeacherSubjects().subscribe((teachers: TeacherSubjects[]) => {
       this.teachers = teachers;
     });
   }

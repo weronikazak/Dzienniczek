@@ -13,13 +13,15 @@
         </div>
       </div>
 
-      <div class="col-md-6 mb-3">
-        <label for="lastName">Nauczyciel</label>
-        <input type="text" class="form-control" id="teacher" formControlName="teacher">
-        <div class="invalid-feedback">
-          Dodaj mordini nauczyciela.
+      <!-- <div class="col-md-6 mb-3">
+        <div class="form-group">
+          <label for="teacher">Nauczyciel</label>
+          <select class="form-control" id="teacher" required formControlName="teacherId">
+            <option *ngFor="let teacher of teacherList" [ngValue]="teacher.id">
+              {{teacher.fullName}}</option>
+          </select>
         </div>
-      </div>
+        </div> -->
     </div>
 
     <hr class="mb-4">

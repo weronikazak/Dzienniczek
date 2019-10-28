@@ -41,7 +41,7 @@
   
         <div class="form-group">
           <label for="clas">Wychowawca (opcjonalne)</label>
-          <select class="form-control" id="clas" required formControlName="classId">
+          <select class="form-control" id="clas" formControlName="classId">
             <option *ngFor="let class of classList" [ngValue]="class.id">
               {{class.className}}</option>
           </select>

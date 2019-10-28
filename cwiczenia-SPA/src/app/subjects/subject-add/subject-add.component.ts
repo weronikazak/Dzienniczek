@@ -4,6 +4,8 @@ import { SubjectService } from 'src/app/services/subject.service';
 import { Subjects } from 'src/app/models/subjects';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { Router } from '@angular/router';
+import { TeacherService } from 'src/app/services/teacher.service';
+import { Teacher } from 'src/app/models/teacher';
 
 @Component({
   selector: 'app-subject-add',
@@ -13,20 +15,28 @@ import { Router } from '@angular/router';
 export class SubjectAddComponent implements OnInit {
   addSubjectForm: FormGroup;
   newSubject: Subjects;
+  // teacherList: Teacher[];
 
   constructor(private fb: FormBuilder, private subjectService: SubjectService,
-    private alertify: AlertifyService, private router: Router) { }
+    private alertify: AlertifyService, private router: Router, private teacherService: TeacherService) { }
 
   createForm() {
     this.addSubjectForm = this.fb.group({
       subjectName: [''],
-      teacher: ['renata']
+      teacherId: ['']
     });
   }
 
   ngOnInit() {
+    // this.loadTeachers();
     this.createForm();
   }
+
+  // loadTeachers() {
+  //   this.teacherService.getTeachers().subscribe((teachers: Teacher[]) => {
+  //     this.teacherList = teachers;
+  //   });
+  // }
 
   onSubmit() {
     if (this.addSubjectForm.valid) {

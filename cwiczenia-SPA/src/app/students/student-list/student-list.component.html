@@ -33,7 +33,11 @@
       <td>{{student.dateOfBirth | date}}</td>
       <td>{{student.height | number}}</td>
       <td>{{student.weight | number}}</td>
-      <td><button class="btn btn-primary" [routerLink]="['/ocena/', student.id]">Sprawdź</button></td>
+      <td>
+        <button class="btn btn-primary" [routerLink]="['/ocena/', student.id]">Sprawdź</button>
+        <button class="btn btn-primary" [routerLink]="['/uczen/usun/', student.id]">Usuń</button>
+        <button class="btn btn-primary" [routerLink]="['/uczen/edytuj/', student.id]">Edytuj</button>
+      </td>
     </tr>
     </tbody>
   </table>

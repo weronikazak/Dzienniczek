@@ -17,6 +17,6 @@ namespace cwiczenia.API.Models
         public DateTime DateOfBirth { get; set; }
         public int? ClassId { get; set; }
         public Class Class { get; set; }
-        public ICollection<Subjects> Subjects { get; set; }
+        public ICollection<TeacherSubjects> TeacherSubjects { get; set; }
     }
 }

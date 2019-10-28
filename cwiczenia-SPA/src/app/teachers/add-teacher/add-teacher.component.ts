@@ -46,7 +46,7 @@ export class AddTeacherComponent implements OnInit {
       photo: [''],
       surname: [''],
       dateOfBirth: [''],
-      classId: [''],
+      classId: [],
       subjectId: ['']
     });
   }
@@ -55,7 +55,7 @@ export class AddTeacherComponent implements OnInit {
     this.newTeacher = Object.assign({}, this.addTeacherForm.value);
     this.teacherService.addTeacher(this.newTeacher).subscribe(() => {
       this.alertify.success('Dodano nauczyciela');
-      this.router.navigate(['nauczyciel']);
+      this.router.navigate(['/nauczyciel']);
     }, error => {
       this.alertify.error(error);
     });

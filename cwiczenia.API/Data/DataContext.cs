@@ -12,6 +12,7 @@ namespace cwiczenia.API.Data
         public DbSet<Class> Classes { get; set; }
         public DbSet<Subjects> Subjects { get; set; }
         public DbSet<Enrollments> Enrollments { get; set; }
+        public DbSet<TeacherSubjects> TeacherSubjects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
@@ -41,10 +42,15 @@ namespace cwiczenia.API.Data
                 .WithOne(u => u.Class)
                 .HasForeignKey(u => u.ClassId);
 
-            modelBuilder.Entity<Subjects>()
+            modelBuilder.Entity<TeacherSubjects>()
                 .HasOne(u => u.Teacher)
-                .WithMany(u => u.Subjects)
+                .WithMany(u => u.TeacherSubjects)
                 .HasForeignKey(u => u.TeacherId);
+
+            modelBuilder.Entity<TeacherSubjects>()
+                .HasOne(u => u.Subject)
+                .WithMany(u => u.TeacherSubjects)
+                .HasForeignKey(u => u.SubjectId);
         }
     }
 }

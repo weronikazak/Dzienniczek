@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using cwiczenia.API.Data;
@@ -24,7 +25,6 @@ namespace cwiczenia.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTeachers() {
             var teachers = await _repo.GetTeachers();
-
             return Ok(teachers);
         }
 
@@ -32,21 +32,54 @@ namespace cwiczenia.API.Controllers
         public async Task<IActionResult> AddTeacher(TeacherForRegisterDto teacherForRegisterDto) {
             var teacher = _mapper.Map<Teacher>(teacherForRegisterDto);
 
-            if (await _repo.GetSubject(teacher.Id) == null)
-                throw new Exception("Nie ma takiego przedmiotu.");
-
             if (teacherForRegisterDto.ClassId != null) {
-                if (await _repo.GetClass((int)teacher.ClassId) == null) {
-                throw new Exception("Nie ma takiej klasy");
+                var clas = await _repo.GetClass((int)teacher.ClassId);
+                if (clas == null) {
+                    throw new Exception("Nie ma takiej klasy");
                 }
             }
 
-            return Ok(teacher);
+            var subject = await _repo.GetSubject(teacherForRegisterDto.SubjectId);
+
+            if (subject == null) 
+                throw new Exception("Taki przedmiot nie istnieje");
+
+            var ts = new TeacherSubjects();
+            ts.Teacher = teacher;
+            ts.Subject = subject;
+
+            _repo.Add(ts);
+            
+            // var teacherSubjects = new List<Subjects>();
+
+            // teacherSubjects.Add(subject);
+
+            // teacher.Subjects = teacherSubjects;
+
+            // subject.TeacherId = teacher.Id;
+            // subject.Teacher = teacher;
+            //teacher.Subjects.Add(subject);
+
+
+            _repo.Add(teacher);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception("Cos poszlo nie tak podczas dodawania");
+
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTeacher(int id) {
             var teacher = await _repo.GetTeacher(id);
+
+            return Ok(teacher);
+        }
+
+        [HttpGet("getSubjects")]
+        public async Task<IActionResult> GetTeacherSubjects() {
+            var teacher = await _repo.GetTeacherSubjects();
 
             return Ok(teacher);
         }

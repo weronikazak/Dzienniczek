@@ -13,6 +13,8 @@ namespace cwiczenia.API.Helpers
             CreateMap<StudentForUpdateDto, Student>().ReverseMap();
             CreateMap<ClassForCreationDto, Class>().ReverseMap();
             CreateMap<ClassForUpdateDto, Class>().ReverseMap();
+            CreateMap<Teacher, TeacherForRegisterDto>().ReverseMap();
+            CreateMap<TeacherForUpdateDto, Teacher>().ReverseMap();
         }
     }
 }

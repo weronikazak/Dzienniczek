@@ -19,19 +19,18 @@
       <th scope="col">#</th>
       <th scope="col">Photo</th>
       <th scope="col">Imię i nazwisko</th>
-      <th scope="col">Klasa</th>
       <th scope="col">Przedmioty</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let teacher of teachers | listFilter: searchModel">
+    <tr *ngFor="let teacher of teachers">
       <th scope="row">{{ teacher.id }}</th>
       <td>
-        <img [src]="teacher.photo">
+        {{teacher.teacher.fullName}}
       </td>
-      <td><ngb-highlight [result]="teacher.fullName"></ngb-highlight></td>
-      <td><ngb-highlight [result]="teacher.class?.name"></ngb-highlight></td>
-      <td><ngb-highlight [result]="teacher.subjects"></ngb-highlight></td>
+      <td>
+          {{teacher.subject.subjectName}}
+    </td>
     </tr>
     </tbody>
   </table>

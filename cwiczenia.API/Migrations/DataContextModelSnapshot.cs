@@ -85,11 +85,7 @@ namespace cwiczenia.API.Migrations
 
                     b.Property<string>("SubjectName");
 
-                    b.Property<int>("TeacherId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
 
                     b.ToTable("Subjects");
                 });
@@ -100,6 +96,8 @@ namespace cwiczenia.API.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ClassId");
+
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("Name");
 
@@ -113,6 +111,24 @@ namespace cwiczenia.API.Migrations
                         .IsUnique();
 
                     b.ToTable("Teachers");
+                });
+
+            modelBuilder.Entity("cwiczenia.API.Models.TeacherSubjects", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("SubjectId");
+
+                    b.Property<int>("TeacherId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherSubjects");
                 });
 
             modelBuilder.Entity("cwiczenia.API.Models.Enrollments", b =>
@@ -135,19 +151,24 @@ namespace cwiczenia.API.Migrations
                         .HasForeignKey("ClassId");
                 });
 
-            modelBuilder.Entity("cwiczenia.API.Models.Subjects", b =>
-                {
-                    b.HasOne("cwiczenia.API.Models.Teacher", "Teacher")
-                        .WithMany("Subjects")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("cwiczenia.API.Models.Teacher", b =>
                 {
                     b.HasOne("cwiczenia.API.Models.Class", "Class")
                         .WithOne("Teacher")
                         .HasForeignKey("cwiczenia.API.Models.Teacher", "ClassId");
+                });
+
+            modelBuilder.Entity("cwiczenia.API.Models.TeacherSubjects", b =>
+                {
+                    b.HasOne("cwiczenia.API.Models.Subjects", "Subject")
+                        .WithMany("TeacherSubjects")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("cwiczenia.API.Models.Teacher", "Teacher")
+                        .WithMany("TeacherSubjects")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

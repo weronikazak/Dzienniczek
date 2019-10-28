@@ -8,7 +8,7 @@ export interface Teacher {
     fullName: string;
     photo: string;
     dateOfBirth: Date;
-    classId: number;
+    classId?: number;
     class: Class;
     subject: Subjects[];
 }
